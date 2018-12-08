@@ -31,7 +31,7 @@ public class Comics extends UserDateAudit {
 	private Characters characters;
 	
 	@Column(nullable=false)
-	private Long comics_id;
+	private Long comicsid;
 
 	public Long getId() {
 		return id;
@@ -49,18 +49,18 @@ public class Comics extends UserDateAudit {
 		this.characters = characters;
 	}
 
-	public Long getComics_id() {
-		return comics_id;
+	public Long getComicsid() {
+		return comicsid;
 	}
 
-	public void setComics_id(Long comics_id) {
-		this.comics_id = comics_id;
+	public void setComicsid(Long comicsid) {
+		this.comicsid = comicsid;
 	}
 
-	public Comics(Characters characters, Long comics_id) {
+	public Comics(Characters characters, Long comicsid) {
 		super();
 		this.characters = characters;
-		this.comics_id = comics_id;
+		this.comicsid = comicsid;
 	}
 	
 	

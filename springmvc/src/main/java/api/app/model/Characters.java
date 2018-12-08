@@ -27,11 +27,11 @@ public class Characters extends UserDateAudit {
     private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "userid", nullable = false)
 	private User user;
 	
 	@Column(nullable=false)
-	private Long characters_id;
+	private Long charactersid;
 
 	public Long getId() {
 		return id;
@@ -52,18 +52,18 @@ public class Characters extends UserDateAudit {
 		this.user = user;
 	}
 
-	public Long getCharacters_id() {
-		return characters_id;
+	public Long getCharactersid() {
+		return charactersid;
 	}
 
-	public void setCharacters_id(Long characters_id) {
-		this.characters_id = characters_id;
+	public void setCharactersid(Long charactersid) {
+		this.charactersid = charactersid;
 	}
 
-	public Characters(User user, Long characters_id) {
+	public Characters(User user, Long charactersid) {
 		super();
 		this.user = user;
-		this.characters_id = characters_id;
+		this.charactersid = charactersid;
 	}
 	
 	
