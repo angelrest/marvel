@@ -13,6 +13,8 @@ import api.app.model.User;
 import api.app.payload.UserIdentityAvailability;
 import api.app.payload.UserProfile;
 import api.app.payload.UserSummary;
+import api.app.repository.CharactersRepository;
+import api.app.repository.ComicsRepository;
 import api.app.repository.UserRepository;
 import api.app.security.CurrentUser;
 import api.app.security.UserPrincipal;
@@ -24,7 +26,11 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
     
+    @Autowired
+    private CharactersRepository charactersRepository;
 
+    @Autowired
+    private ComicsRepository comicsRepository;
     
     @SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -43,11 +49,21 @@ public class UserController {
         return new UserIdentityAvailability(isAvailable);
     }
 
-    @GetMapping("/user/checkEmailAvailability")
-    public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
-        Boolean isAvailable = !userRepository.existsByEmail(email);
+    @GetMapping("/user/checkCharacterAvailability")
+    public UserIdentityAvailability checkCharacterAvailability(@RequestParam(value = "characters") Long characters,
+    		@RequestParam(value = "username") String username) {
+        Boolean isAvailable = !charactersRepository.existsByCharactersidAndUserUsername(characters, username);
         return new UserIdentityAvailability(isAvailable);
     }
+    
+    /*consultar si existe un personaje en a lista de favoritos*/
+    @GetMapping("/user/checkComicsAvailability")
+    public UserIdentityAvailability checkComicsAvailability(@RequestParam(value = "characters") Long characters,
+    		@RequestParam(value = "comics") Long comics,@RequestParam(value = "username") String username) {
+        Boolean isAvailable = !comicsRepository.existsByCharactersCharactersidAndComicsidAndCharactersUserUsername(characters, comics, username);
+        return new UserIdentityAvailability(isAvailable);
+    }
+    
     
    @PreAuthorize("hasRole('USER')")
     @GetMapping("/users/{username}")
