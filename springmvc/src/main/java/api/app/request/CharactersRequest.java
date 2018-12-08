@@ -8,6 +8,18 @@ public class CharactersRequest {
     private Long userid;
 	@NotNull
 	private Long charactersid;
+	
+	@NotNull
+	private String name;
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public Long getUserid() {
 		return userid;
 	}

@@ -17,7 +17,9 @@ public interface CharactersRepository extends JpaRepository<Characters, Long> {
 	Page<Characters> findByUserUsernameAndCharactersid(@Param("username") String username, 
 			@Param("charactersid") Long charactersid, Pageable pageable);
 	
-	Boolean existsByCharactersidAndUserUsername(Long id,String username);
+	boolean existsByCharactersidAndUserUsername(Long id,String username);
+
+	boolean existsByCharactersidAndUserId(Long charactersid, Long userid);
 	
 
 }

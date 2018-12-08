@@ -63,10 +63,7 @@ public class CharactersService {
         return characterRepository.save(character);
     }
 
-	public static Characters createas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 }
