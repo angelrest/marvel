@@ -13,7 +13,7 @@ import api.app.model.User;
 import api.app.payload.UserIdentityAvailability;
 import api.app.payload.UserProfile;
 import api.app.payload.UserSummary;
-import api.app.repository.CharactersRepository;
+
 import api.app.repository.ComicsRepository;
 import api.app.repository.UserRepository;
 import api.app.security.CurrentUser;
@@ -26,8 +26,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
     
-    @Autowired
-    private CharactersRepository charactersRepository;
 
     @Autowired
     private ComicsRepository comicsRepository;
@@ -56,12 +54,7 @@ public class UserController {
     }
     
 
-    @GetMapping("/user/checkCharacterAvailability")
-    public UserIdentityAvailability checkCharacterAvailability(@RequestParam(value = "characters") Long characters,
-    		@RequestParam(value = "id") Long id) {
-        Boolean isAvailable = !charactersRepository.existsByCharactersidAndUserId(characters, id);
-        return new UserIdentityAvailability(isAvailable);
-    }
+   
     
     /*consultar si existe un personaje en a lista de favoritos*/
     @GetMapping("/user/checkComicsAvailability")
