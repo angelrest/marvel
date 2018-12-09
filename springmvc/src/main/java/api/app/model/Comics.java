@@ -34,8 +34,10 @@ public class Comics extends UserDateAudit {
 	@Column(nullable=false)
 	private Long comicsid;
 	
+	@Column(length=300)
 	private String uriimage;
 	
+	@Column(length=2000)
 	private String description;
 
 	public Long getId() {

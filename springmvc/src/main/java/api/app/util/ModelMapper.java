@@ -13,7 +13,8 @@ public class ModelMapper {
     	comicResponse.setUserid(comic.getUserid());
     	comicResponse.setCharactersid(comic.getCharactersid());
     	comicResponse.setComicsid(comic.getComicsid());
-    	
+    	comicResponse.setDescription(comic.getDescription());
+    	comicResponse.setUriimage(comic.getUriimage());
     	return comicResponse;
     }
 

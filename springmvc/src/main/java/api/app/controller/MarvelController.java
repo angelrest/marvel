@@ -4,6 +4,9 @@ import java.net.URI;
 
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,7 @@ import api.app.request.ComicsRequest;
 import api.app.response.ComicsResponse;
 import api.app.response.PagedResponse;
 import api.app.security.CurrentUser;
+import api.app.security.JwtTokenProvider;
 import api.app.security.UserPrincipal;
 
 import api.app.service.ComicsService;
@@ -42,6 +46,7 @@ public class MarvelController {
     private  ComicsRepository comicsRepository;
 	//
 	
+	
     @GetMapping
     @PreAuthorize("hasRole('USER')")
     public PagedResponse<ComicsResponse> getComics(@CurrentUser UserPrincipal currentUser,
@@ -49,6 +54,7 @@ public class MarvelController {
                                                 @RequestParam(value = "size", defaultValue = Constants.DEFAULT_PAGE_SIZE) int size,
                                                 @RequestParam(value = "characters") Long characters,
                                                 @RequestParam(value = "comics") Long comics) {
+    	
         return comicsService.getCharactersByUsers(currentUser, page, size,comics, characters);
     }
     
