@@ -49,10 +49,17 @@ public class UserController {
         return new UserIdentityAvailability(isAvailable);
     }
 
+    @GetMapping("/user/checkEmailAvailability")
+    public UserIdentityAvailability checkEmailAvailability(@RequestParam(value = "email") String email) {
+        Boolean isAvailable = !userRepository.existsByEmail(email);
+        return new UserIdentityAvailability(isAvailable);
+    }
+    
+
     @GetMapping("/user/checkCharacterAvailability")
     public UserIdentityAvailability checkCharacterAvailability(@RequestParam(value = "characters") Long characters,
-    		@RequestParam(value = "username") String username) {
-        Boolean isAvailable = !charactersRepository.existsByCharactersidAndUserUsername(characters, username);
+    		@RequestParam(value = "id") Long id) {
+        Boolean isAvailable = !charactersRepository.existsByCharactersidAndUserId(characters, id);
         return new UserIdentityAvailability(isAvailable);
     }
     

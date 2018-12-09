@@ -50,10 +50,11 @@ public class MarvelController {
 	@PostMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> createCharacter(@Valid @RequestBody CharactersRequest charactersRequest) {
-        
+        int page=0;
+        int size=Integer.parseInt(Constants.DEFAULT_PAGE_SIZE);
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/")
-                .buildAndExpand().toUri();
+                .fromCurrentRequest().path("/{page}/{size}/{characters}")
+                .buildAndExpand(page,size,charactersRequest.getCharactersid()).toUri();
         
         if(characterRepository.existsByCharactersidAndUserId(charactersRequest.getCharactersid(),charactersRequest.getUserid())) {
             return new ResponseEntity(new ApiResponse(false, "character already exists"),
@@ -63,7 +64,7 @@ public class MarvelController {
         charactersService.createCharacters(charactersRequest);
 
         return ResponseEntity.created(location)
-                .body(new ApiResponse(true, "Character Favourite:"+charactersRequest.getName()));
+                .body(new ApiResponse(true, "Character favourite:"+charactersRequest.getName()));
     }
 
 

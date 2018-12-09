@@ -26,12 +26,18 @@ public class Comics extends UserDateAudit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "charactersid", nullable = false)
-	private Characters characters;
+	@Column(nullable=false)
+	private Long  charactersid;
+	
+	@Column(nullable=false)
+	private Long userid;
 	
 	@Column(nullable=false)
 	private Long comicsid;
+	
+	private String uriimage;
+	
+	private String description;
 
 	public Long getId() {
 		return id;
@@ -41,12 +47,20 @@ public class Comics extends UserDateAudit {
 		this.id = id;
 	}
 
-	public Characters getCharacters() {
-		return characters;
+	public Long getCharactersid() {
+		return charactersid;
 	}
 
-	public void setCharacters(Characters characters) {
-		this.characters = characters;
+	public void setCharactersid(Long charactersid) {
+		this.charactersid = charactersid;
+	}
+
+	public Long getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Long userid) {
+		this.userid = userid;
 	}
 
 	public Long getComicsid() {
@@ -57,13 +71,34 @@ public class Comics extends UserDateAudit {
 		this.comicsid = comicsid;
 	}
 
-	public Comics(Characters characters, Long comicsid) {
+	public String getUriimage() {
+		return uriimage;
+	}
+
+	public void setUriimage(String uriimage) {
+		this.uriimage = uriimage;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Comics(Long charactersid, Long userid, Long comicsid, String uriimage, String description) {
 		super();
-		this.characters = characters;
+		this.charactersid = charactersid;
+		this.userid = userid;
 		this.comicsid = comicsid;
+		this.uriimage = uriimage;
+		this.description = description;
 	}
 	
 	
+	
+		
 	
 
 }
