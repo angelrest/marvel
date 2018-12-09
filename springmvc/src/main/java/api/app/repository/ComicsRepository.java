@@ -11,9 +11,13 @@ import api.app.model.Comics;
 @Repository
 public interface ComicsRepository extends JpaRepository<Comics, Long> {
 	
-	Page<Comics> findByCharactersidAndComicsidAndUserid(Long character, Long comics, Long userid, Pageable pageable);
+	
 	
 Boolean existsByCharactersidAndComicsidAndUserid(Long character, Long comics, Long userid);
+
+Page<Comics> findByCharactersidAndUserid(Long characters, Long id, Pageable pageable);
+
+Page<Comics> findByUserid(Long id, Pageable pageable);
 	
 
 }

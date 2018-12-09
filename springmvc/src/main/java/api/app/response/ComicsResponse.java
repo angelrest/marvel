@@ -10,6 +10,13 @@ public class ComicsResponse {
 	private Long comicsid;
 	private String uriimage;
 	private String description;
+	
+	private String titleCharacter;		
+	
+	private String titleComics;
+	
+	
+	
 	public Long getCharactersid() {
 		return charactersid;
 	}
@@ -45,6 +52,18 @@ public class ComicsResponse {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getTitleCharacter() {
+		return titleCharacter;
+	}
+	public void setTitleCharacter(String titleCharacter) {
+		this.titleCharacter = titleCharacter;
+	}
+	public String getTitleComics() {
+		return titleComics;
+	}
+	public void setTitleComics(String titleComics) {
+		this.titleComics = titleComics;
 	}
 	
 	

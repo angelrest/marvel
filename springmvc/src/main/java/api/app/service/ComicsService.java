@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import api.app.controller.MarvelController;
 import api.app.exception.BadRequestException;
 
 import api.app.model.Comics;
@@ -34,11 +33,11 @@ public class ComicsService {
 	private ComicsRepository comicsRepository;
 	private static final Logger logger = LoggerFactory.getLogger(ComicsService.class);
 
-	public PagedResponse<ComicsResponse> getCharactersByUsers(UserPrincipal currentUser, int page, int size, Long comics, Long characters) {
+	public PagedResponse<ComicsResponse> getCharactersByUsers(UserPrincipal currentUser, int page, int size) {
 		validatePageNumberAndSize(page, size);
 		Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
 		
-		Page<Comics> comic= comicsRepository.findByCharactersidAndComicsidAndUserid(characters,comics,currentUser.getId(),pageable);
+		Page<Comics> comic= comicsRepository.findByUserid(currentUser.getId(),pageable);
 		
 		if(comic.getNumberOfElements() == 0) {
             return new PagedResponse<>(Collections.emptyList(), comic.getNumber(),
@@ -72,6 +71,9 @@ public class ComicsService {
 		comics.setComicsid(comicsRequest.getComicsid());
 		comics.setUriimage(comicsRequest.getUriimage());
 		comics.setDescription(comicsRequest.getDescription());
+		comics.setTitleCharacter(comicsRequest.getTitleCharacter());
+		comics.setTitleComics(comicsRequest.getTitleComics());
+		
         return comicsRepository.save(comics);
     }
 

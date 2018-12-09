@@ -15,6 +15,8 @@ public class ModelMapper {
     	comicResponse.setComicsid(comic.getComicsid());
     	comicResponse.setDescription(comic.getDescription());
     	comicResponse.setUriimage(comic.getUriimage());
+    	comicResponse.setTitleCharacter(comic.getTitleCharacter());
+    	comicResponse.setTitleComics(comic.getTitleComics());
     	return comicResponse;
     }
 

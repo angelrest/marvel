@@ -39,6 +39,13 @@ public class Comics extends UserDateAudit {
 	
 	@Column(length=2000)
 	private String description;
+	
+	private String titleCharacter;
+	
+	private String titleComics;
+	
+	
+	
 
 	public Long getId() {
 		return id;
@@ -95,6 +102,22 @@ public class Comics extends UserDateAudit {
 		this.comicsid = comicsid;
 		this.uriimage = uriimage;
 		this.description = description;
+	}
+
+	public String getTitleCharacter() {
+		return titleCharacter;
+	}
+
+	public void setTitleCharacter(String titleCharacter) {
+		this.titleCharacter = titleCharacter;
+	}
+
+	public String getTitleComics() {
+		return titleComics;
+	}
+
+	public void setTitleComics(String titleComics) {
+		this.titleComics = titleComics;
 	}
 	
 	
