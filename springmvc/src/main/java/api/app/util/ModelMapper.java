@@ -1,18 +1,20 @@
 package api.app.util;
 
-import api.app.model.Characters;
-import api.app.response.CharactersResponse;
+
+import api.app.model.Comics;
+
+import api.app.response.ComicsResponse;
 
 public class ModelMapper {
 
-    public static CharactersResponse mapCharactersToCharactersResponse(Characters characters) {
-    	CharactersResponse charactersResponse = new CharactersResponse();
-    	charactersResponse.setId(characters.getId());
-    	charactersResponse.setUser(characters.getUser());
-    	charactersResponse.setCharactersid(characters.getCharactersid());
+    public static ComicsResponse mapComicsToComicsResponse(Comics comic) {
+    	ComicsResponse comicResponse = new ComicsResponse();
+    	comicResponse.setId(comic.getId());
+    	comicResponse.setUserid(comic.getUserid());
+    	comicResponse.setCharactersid(comic.getCharactersid());
+    	comicResponse.setComicsid(comic.getComicsid());
     	
-        
-        return charactersResponse;
+    	return comicResponse;
     }
 
 }

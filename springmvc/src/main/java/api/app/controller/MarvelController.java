@@ -18,13 +18,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import api.app.payload.ApiResponse;
-import api.app.repository.CharactersRepository;
-import api.app.request.CharactersRequest;
-import api.app.response.CharactersResponse;
+
+import api.app.repository.ComicsRepository;
+
+import api.app.request.ComicsRequest;
+
+import api.app.response.ComicsResponse;
 import api.app.response.PagedResponse;
 import api.app.security.CurrentUser;
 import api.app.security.UserPrincipal;
-import api.app.service.CharactersService;
+
+import api.app.service.ComicsService;
 import api.app.util.Constants;
 
 @RestController
@@ -32,39 +36,40 @@ import api.app.util.Constants;
 public class MarvelController {
 	
 	@Autowired
-	private CharactersService charactersService;
+	private ComicsService comicsService;
 	
 	@Autowired
-    private  CharactersRepository characterRepository;
+    private  ComicsRepository comicsRepository;
 	
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public PagedResponse<CharactersResponse> getCharacters(@CurrentUser UserPrincipal currentUser,
+    public PagedResponse<ComicsResponse> getComics(@CurrentUser UserPrincipal currentUser,
                                                 @RequestParam(value = "page", defaultValue = Constants.DEFAULT_PAGE_NUMBER) int page,
                                                 @RequestParam(value = "size", defaultValue = Constants.DEFAULT_PAGE_SIZE) int size,
-                                                @RequestParam(value = "characters") Long characters) {
-        return charactersService.getCharactersByUsers(currentUser, page, size, characters);
+                                                @RequestParam(value = "characters") Long characters,
+                                                @RequestParam(value = "comics") Long comics) {
+        return comicsService.getCharactersByUsers(currentUser, page, size,comics, characters);
     }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@PostMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> createCharacter(@Valid @RequestBody CharactersRequest charactersRequest) {
+    public ResponseEntity<?> createComics(@Valid @RequestBody ComicsRequest comicsRequest) {
         int page=0;
         int size=Integer.parseInt(Constants.DEFAULT_PAGE_SIZE);
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest().path("/{page}/{size}/{characters}")
-                .buildAndExpand(page,size,charactersRequest.getCharactersid()).toUri();
+                .fromCurrentRequest().path("/{page}/{size}/{characters}/{comics}")
+                .buildAndExpand(page,size,comicsRequest.getCharactersid(),comicsRequest.getComicsid()).toUri();
         
-        if(characterRepository.existsByCharactersidAndUserId(charactersRequest.getCharactersid(),charactersRequest.getUserid())) {
+        if(comicsRepository.existsByCharactersidAndComicsidAndUserid(comicsRequest.getCharactersid(),comicsRequest.getComicsid(),comicsRequest.getUserid())) {
             return new ResponseEntity(new ApiResponse(false, "character already exists"),
                     HttpStatus.BAD_REQUEST);
         }
         
-        charactersService.createCharacters(charactersRequest);
+        comicsService.createComics(comicsRequest);
 
         return ResponseEntity.created(location)
-                .body(new ApiResponse(true, "Character favourite:"+charactersRequest.getName()));
+                .body(new ApiResponse(true, "Comics favourite:"));
     }
 
 

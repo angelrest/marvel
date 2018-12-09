@@ -66,8 +66,8 @@ public class UserController {
     /*consultar si existe un personaje en a lista de favoritos*/
     @GetMapping("/user/checkComicsAvailability")
     public UserIdentityAvailability checkComicsAvailability(@RequestParam(value = "characters") Long characters,
-    		@RequestParam(value = "comics") Long comics,@RequestParam(value = "username") String username) {
-        Boolean isAvailable = !comicsRepository.existsByCharactersCharactersidAndComicsidAndCharactersUserUsername(characters, comics, username);
+    		@RequestParam(value = "comics") Long comics,@RequestParam(value = "userid") Long userid) {
+        Boolean isAvailable = !comicsRepository.existsByCharactersidAndComicsidAndUserid(characters, comics, userid);
         return new UserIdentityAvailability(isAvailable);
     }
     
